@@ -1,0 +1,10 @@
+{
+    "filewatcher.commands": [
+        {
+            "match": "\\.ts*",
+            "isAsync": true,
+            "cmd": "bun start",
+            "event": "onFileChange"
+        }		
+    ]
+}
