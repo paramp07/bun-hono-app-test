@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ export const Route = createFileRoute("/create-expense")({
 });
 
 function CreateExpense() {
+  const navigate = useNavigate();
   const form = useForm({
     defaultValues: {
       title: "",
@@ -19,13 +20,14 @@ function CreateExpense() {
     },
     onSubmit: async ({ value }) => {
       // Do something with form data
-      await new Promise(r=> setTimeout(r, 3000))
+      await new Promise((r) => setTimeout(r, 3000));
 
-      const res = await api.expenses.$post({json: value});
+      const res = await api.expenses.$post({ json: value });
       if (!res.ok) {
-        throw new Error("server error")
+        throw new Error("server error");
       }
-      
+
+      navigate({ to: "/expenses" });
     },
   });
 
